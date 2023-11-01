@@ -21,6 +21,9 @@ exports.getAllActors = async (req, res, next) => {
 
 exports.createActors = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = req.file.path;
+    }
     const actor = await Actor.create(req.body);
     res.status(201).json(actor);
   } catch (error) {

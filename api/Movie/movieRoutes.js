@@ -1,5 +1,6 @@
 const express = require("express");
 const movies = require("./movieControllers");
+const upload = require("../../middlewares/multer");
 const router = express.Router();
 
 router.param("movieId", async (req, res, next, movieId) => {
@@ -15,7 +16,7 @@ router.param("movieId", async (req, res, next, movieId) => {
 });
 
 router.get("/", movies.getAllMovies);
-router.post("/", movies.createMovies);
+router.post("/", upload.single("image"), movies.createMovies);
 router.delete("/:movieId", movies.deleteMovies);
 router.put("/:movieId", movies.updateMovies);
 

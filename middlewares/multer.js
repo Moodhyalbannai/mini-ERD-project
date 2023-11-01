@@ -11,5 +11,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+//search: limits and file types
 
 module.exports = upload;

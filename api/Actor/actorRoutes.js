@@ -1,5 +1,6 @@
 const express = require("express");
 const actors = require("./actorControllers");
+const upload = require("../../middlewares/multer");
 const router = express.Router();
 
 router.param("actorId", async (req, res, next, actorId) => {
@@ -15,7 +16,7 @@ router.param("actorId", async (req, res, next, actorId) => {
 });
 
 router.get("/", actors.getAllActors);
-router.post("/", actors.createActors);
+router.post("/", upload.single("image"), actors.createActors);
 router.delete("/:actorId", actors.deleteActors);
 router.put("/:actorId", actors.updateActors);
 
